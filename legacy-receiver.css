@@ -1,0 +1,355 @@
+/* ==========================================================================
+   LEGACY RECEIVER CSS - STRICTLY OPTIMIZED FOR iOS 9 & iOS 10 SAFARI
+   Vendor prefixes, zero modern CSS bugs, maximum hardware rendering speed
+   ========================================================================== */
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #050608;
+  color: #ffffff;
+  font-family: -apple-system, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  position: fixed;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Container for Fullscreen Viewport */
+#receiver-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Primary Canvas Display */
+#stream-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -webkit-transform: translateZ(0); /* Hardware acceleration trigger */
+  transform: translateZ(0);
+  background: #000000;
+  display: block;
+}
+
+/* Fallback MJPEG Image Display */
+#stream-mjpeg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: none;
+  background: #000000;
+}
+
+/* Fallback Video Display */
+#stream-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: none;
+  background: #000000;
+}
+
+/* ==========================================================================
+   TOUCH HUD OVERLAY (Fades out during active stream, appears on tap)
+   ========================================================================== */
+#hud-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 50;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+#hud-overlay.hud-hidden {
+  opacity: 0;
+}
+
+#hud-overlay.hud-visible {
+  opacity: 1;
+}
+
+/* Top Bar HUD */
+.hud-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 18px;
+  background: #0a0d14;
+  background: rgba(10, 13, 20, 0.85);
+  border-bottom: 1px solid #1a2d45;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+.hud-brand {
+  font-size: 16px;
+  font-weight: bold;
+  color: #00a2ff;
+  letter-spacing: 1px;
+}
+
+.hud-stats-group {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.hud-stat-pill {
+  display: inline-block;
+  background: #111722;
+  border: 1px solid #1f334d;
+  color: #e0e8f5;
+  padding: 4px 10px;
+  margin-left: 6px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: monospace, monospace;
+}
+
+.stat-good {
+  color: #00ff88;
+  border-color: #008044;
+}
+
+.stat-warn {
+  color: #ffcc00;
+  border-color: #997a00;
+}
+
+.stat-danger {
+  color: #ff3344;
+  border-color: #991a24;
+}
+
+/* Bottom Bar Controls */
+.hud-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 18px;
+  background: #0a0d14;
+  background: rgba(10, 13, 20, 0.9);
+  border-top: 1px solid #1a2d45;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+/* Touch Control Buttons */
+.touch-btn {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  background: #162030;
+  border: 1px solid #00a2ff;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+  text-decoration: none;
+}
+
+.touch-btn:active {
+  background: #00a2ff;
+  color: #ffffff;
+}
+
+.touch-btn-red {
+  border-color: #ff2a4b;
+  background: #2b0e15;
+}
+
+.touch-btn-red:active {
+  background: #ff2a4b;
+}
+
+/* Initial Join Box (Centered Overlay) */
+#join-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 420px;
+  background: #0d121c;
+  border: 2px solid #00a2ff;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  z-index: 100;
+  box-shadow: 0 10px 30px #000000;
+}
+
+.join-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.join-subtitle {
+  font-size: 13px;
+  color: #8da2be;
+  margin-bottom: 20px;
+}
+
+.join-input {
+  width: 100%;
+  background: #06080d;
+  border: 2px solid #203a5e;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #00ffcc;
+  text-align: center;
+  margin-bottom: 16px;
+  outline: none;
+}
+
+.join-input:focus {
+  border-color: #00a2ff;
+}
+
+/* Connecting / Loading Spinner */
+#connecting-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 7, 12, 0.92);
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  z-index: 80;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #1a2a3f;
+  border-top: 4px solid #00a2ff;
+  border-right: 4px solid #ff2a4b;
+  border-radius: 50%;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Compatibility Alert Box */
+.compat-alert {
+  background: #261b05;
+  border: 1px solid #ffaa00;
+  color: #ffea9f;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin: 12px 0;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   LOW PERFORMANCE MODE (Disables transitions, shadows, blurs for iPad 2/3/4)
+   ========================================================================== */
+body.low-perf * {
+  -webkit-transition: none !important;
+  transition: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.low-perf #hud-overlay {
+  background: #000000;
+}

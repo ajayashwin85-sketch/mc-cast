@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>WebCast Sender — Cast Your Screen to iPad</title>
+  <meta name="description" content="Phone screen streaming control console for WebCast. Cast your Android phone or PC screen to an old iPad.">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">📱</div>
+      <div class="brand-name">
+        SENDER CONSOLE <span class="brand-badge">PHONE TO IPAD</span>
+      </div>
+    </a>
+    <div class="header-links">
+      <span id="stream-status-pill" class="status-pill status-waiting">
+        <span class="feature-dot dot-blue"></span> READY TO CAST
+      </span>
+      <a href="index.html" class="btn btn-outline btn-sm">Home</a>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- Real-time HUD Telemetry Bar -->
+    <div class="hud-bar">
+      <div class="hud-item">
+        <span class="hud-label">Receivers:</span>
+        <span id="receiver-count" class="hud-val" style="color: var(--web-blue);">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">FPS:</span>
+        <span id="stat-fps" class="hud-val">0 FPS</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Resolution:</span>
+        <span id="stat-res" class="hud-val">1280x720</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Bitrate:</span>
+        <span id="stat-bitrate" class="hud-val">0 Kbps</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Ping:</span>
+        <span id="stat-latency" class="hud-val">-- ms</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Audio:</span>
+        <span id="stat-audio" class="hud-val" style="color: var(--hud-green);">OFF</span>
+      </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="sender-alerts"></div>
+
+    <!-- HTTPS Warning Banner (Shown on Insecure Mobile HTTP) -->
+    <div id="https-warning-banner" style="display: none; background: rgba(255, 42, 75, 0.15); border: 2px solid var(--spider-red); padding: 16px; border-radius: var(--radius-md); margin-bottom: 20px;">
+      <div style="font-weight: 700; color: #ffffff; margin-bottom: 6px; font-size: 1.05rem;">
+        🔒 Switch to Secure Connection for Real Screen Mirroring
+      </div>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+        Modern mobile and desktop browsers block the Screen Capture API over non-HTTPS Wi-Fi links. Click the button below to switch to the secure HTTPS port and unlock real-time screen sharing.
+      </p>
+      <a id="https-switch-link" href="#" class="btn btn-red" style="display: inline-flex; width: auto; padding: 10px 20px; font-size: 0.9rem;">
+        👉 Open in Secure HTTPS (Port 3443)
+      </a>
+    </div>
+
+    <div class="role-grid" style="align-items: start;">
+      
+      <!-- Left Column: Video Preview & Source Controls -->
+      <section class="card card-red" style="margin-bottom: 0;">
+        <div class="card-header">
+          <div class="card-icon card-icon-red">📡</div>
+          <div>
+            <h2 class="card-title">Live Screen Stream</h2>
+            <div class="card-subtitle">Select source to begin casting</div>
+          </div>
+        </div>
+
+        <!-- Stream Preview Viewport -->
+        <div class="stream-wrapper">
+          <div id="preview-placeholder" class="stream-placeholder">
+            <div class="stream-placeholder-icon">🕷️</div>
+            <p>Screen stream is inactive</p>
+            <span style="font-size: 0.8rem; color: var(--text-dim);">Tap "Cast Phone Screen" below to start</span>
+          </div>
+
+          <video id="sender-preview" class="stream-element" playsinline muted autoplay style="display: none;"></video>
+          <canvas id="sender-canvas-preview" class="stream-element" style="display: none;"></canvas>
+        </div>
+
+        <!-- Stream Action Buttons -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button type="button" id="btn-start-screen" class="btn btn-red">
+            <span>📺</span> Cast Phone / PC Screen
+          </button>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <button type="button" id="btn-start-camera" class="btn btn-outline">
+              <span>📷</span> Camera Mirror
+            </button>
+            <button type="button" id="btn-start-demo" class="btn btn-outline">
+              <span>🎯</span> Test Radar Demo
+            </button>
+          </div>
+
+          <!-- Audio Streaming Options -->
+          <div style="background: rgba(0, 162, 255, 0.08); border: 1px solid rgba(0, 162, 255, 0.25); border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.2rem;">🔊</span>
+              <div>
+                <label for="chk-audio" style="font-weight: 600; font-size: 0.88rem; color: #ffffff; cursor: pointer; display: block;">Stream Audio with Video</label>
+                <div style="font-size: 0.76rem; color: var(--text-muted);">Share Tab / System Audio & Microphone</div>
+              </div>
+            </div>
+            <input type="checkbox" id="chk-audio" checked style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--web-blue);">
+          </div>
+
+          <button type="button" id="btn-stop-stream" class="btn btn-outline" style="display: none; border-color: var(--spider-red); color: var(--spider-red);">
+            <span>⏹️</span> Stop Mirroring
+          </button>
+        </div>
+      </section>
+
+      <!-- Right Column: Settings, Room Code, and Pairing -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Pairing Card -->
+        <section class="card card-blue">
+          <div class="card-header">
+            <div class="card-icon card-icon-blue">🔗</div>
+            <div>
+              <h2 class="card-title">Pair with Old iPad</h2>
+              <div class="card-subtitle">Enter this code in Safari on your iPad</div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin: 10px 0;">
+            <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Session Code</div>
+            <div id="session-code-display" class="code-badge">------</div>
+          </div>
+
+          <!-- QR Code Container -->
+          <div style="display: flex; flex-direction: column; align-items: center; margin: 14px 0;">
+            <canvas id="qr-canvas" style="border-radius: var(--radius-sm); max-width: 180px; height: auto; box-shadow: 0 4px 16px rgba(0,0,0,0.5);"></canvas>
+            <span style="font-size: 0.75rem; color: var(--text-dim); margin-top: 6px;">Scan with iPad camera or modern tablet</span>
+          </div>
+
+          <div style="background: rgba(8, 10, 16, 0.8); padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(0, 162, 255, 0.2); font-size: 0.82rem; margin-bottom: 12px;">
+            <div style="color: var(--text-muted); margin-bottom: 4px;">Direct Link:</div>
+            <div id="share-url-text" style="font-family: monospace; color: var(--web-blue); word-break: break-all;">Loading...</div>
+          </div>
+
+          <button type="button" id="btn-copy-link" class="btn btn-blue btn-sm" style="width: 100%;">
+            <span>📋</span> Copy Receiver Link
+          </button>
+        </section>
+
+        <!-- Stream Quality & FPS Settings -->
+        <section class="card">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; color: var(--text-main);">
+            <span>⚙️</span> Video Quality & Performance
+          </h3>
+
+          <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">Target Resolution:</div>
+          <div class="quality-group">
+            <button type="button" class="quality-btn" data-quality="4k">
+              4K
+              <span class="quality-badge-recommended" style="color: var(--text-dim);">UHD</span>
+            </button>
+            <button type="button" class="quality-btn" data-quality="1080p">
+              1080p
+              <span class="quality-badge-recommended" style="color: var(--text-dim);">FHD</span>
+            </button>
+            <button type="button" class="quality-btn active" data-quality="720p">
+              720p
+              <span class="quality-badge-recommended">iPad Fav</span>
+            </button>
+            <button type="button" class="quality-btn" data-quality="480p">
+              480p
+              <span class="quality-badge-recommended" style="color: var(--text-dim);">Fast</span>
+            </button>
+          </div>
+
+          <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">Frame Rate (FPS):</div>
+          <div class="quality-group" style="grid-template-columns: repeat(4, 1fr);">
+            <button type="button" class="quality-btn fps-btn" data-fps="60">60 FPS</button>
+            <button type="button" class="quality-btn fps-btn active" data-fps="30">30 FPS</button>
+            <button type="button" class="quality-btn fps-btn" data-fps="24">24 FPS</button>
+            <button type="button" class="quality-btn fps-btn" data-fps="15">15 FPS</button>
+          </div>
+
+          <div style="background: rgba(255, 42, 75, 0.08); border-left: 3px solid var(--spider-red); padding: 10px 12px; border-radius: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            💡 <strong>Legacy iPad Tip:</strong> 720p at 30 FPS provides the smoothest mirroring and lowest latency on iPad 2/3/4 and iPad Mini 1/2 without overloading the A-series chip.
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    WebCast MirrorCast &copy; 2026 — Local Wi-Fi Streaming
+  </footer>
+
+  <script src="qrcode.min.js"></script>
+  <script src="utils.js"></script>
+  <script src="sender.js"></script>
+</body>
+</html>

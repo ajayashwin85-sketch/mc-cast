@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" opacity="0.15">
+  <defs>
+    <radialGradient id="webGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00a2ff" stop-opacity="0.3"/>
+      <stop offset="70%" stop-color="#ff2d46" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background Glow -->
+  <rect width="600" height="600" fill="url(#webGlow)"/>
+  
+  <!-- Web Structure (Concentric Polygons) -->
+  <g stroke="#00a2ff" stroke-width="1.2" fill="none" opacity="0.4">
+    <!-- Ring 1 -->
+    <polygon points="300,270 326,285 326,315 300,330 274,315 274,285"/>
+    <!-- Ring 2 -->
+    <polygon points="300,230 361,265 361,335 300,370 239,335 239,265"/>
+    <!-- Ring 3 -->
+    <polygon points="300,180 404,240 404,360 300,420 196,360 196,240"/>
+    <!-- Ring 4 -->
+    <polygon points="300,120 456,210 456,390 300,480 144,390 144,210"/>
+    <!-- Ring 5 -->
+    <polygon points="300,50 517,175 517,425 300,550 83,425 83,175"/>
+    <!-- Outer Ring 6 -->
+    <polygon points="300,0 560,150 560,450 300,600 40,450 40,150"/>
+  </g>
+
+  <!-- Web Radians (Spiderweb Strands) -->
+  <g stroke="#ff2d46" stroke-width="1.2" opacity="0.45">
+    <line x1="300" y1="300" x2="300" y2="0"/>
+    <line x1="300" y1="300" x2="560" y2="150"/>
+    <line x1="300" y1="300" x2="560" y2="450"/>
+    <line x1="300" y1="300" x2="300" y2="600"/>
+    <line x1="300" y1="300" x2="40" y2="450"/>
+    <line x1="300" y1="300" x2="40" y2="150"/>
+    <!-- Intermediates -->
+    <line x1="300" y1="300" x2="450" y2="40" stroke="#00a2ff" stroke-width="0.8"/>
+    <line x1="300" y1="300" x2="580" y2="300" stroke="#00a2ff" stroke-width="0.8"/>
+    <line x1="300" y1="300" x2="450" y2="560" stroke="#00a2ff" stroke-width="0.8"/>
+    <line x1="300" y1="300" x2="150" y2="560" stroke="#00a2ff" stroke-width="0.8"/>
+    <line x1="300" y1="300" x2="20" y2="300" stroke="#00a2ff" stroke-width="0.8"/>
+    <line x1="300" y1="300" x2="150" y2="40" stroke="#00a2ff" stroke-width="0.8"/>
+  </g>
+
+  <!-- Geometric Circuit Accents -->
+  <circle cx="300" cy="300" r="4" fill="#ff2d46"/>
+  <circle cx="300" cy="180" r="2.5" fill="#00a2ff"/>
+  <circle cx="404" cy="240" r="2.5" fill="#00a2ff"/>
+  <circle cx="404" cy="360" r="2.5" fill="#00a2ff"/>
+  <circle cx="300" cy="420" r="2.5" fill="#00a2ff"/>
+  <circle cx="196" cy="360" r="2.5" fill="#00a2ff"/>
+  <circle cx="196" cy="240" r="2.5" fill="#00a2ff"/>
+</svg>

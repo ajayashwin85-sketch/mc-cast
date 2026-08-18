@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>WebCast Receiver — iPad Wireless Display</title>
+  <!-- Legacy-Engineered Vendor-Prefixed CSS for Safari 9 & 10 -->
+  <link rel="stylesheet" href="legacy-receiver.css">
+</head>
+<body>
+
+  <!-- Fullscreen Viewport Display -->
+  <div id="receiver-viewport">
+    
+    <!-- Primary Layer: Turbo Canvas (Sub-50ms latency) -->
+    <canvas id="stream-canvas"></canvas>
+
+    <!-- Fallback Layer 1: Multipart HTTP MJPEG Image Stream -->
+    <img id="stream-mjpeg" alt="Live Screen Stream">
+
+    <!-- Fallback Layer 2: Apple Native Video Tag -->
+    <video id="stream-video" playsinline webkit-playsinline autoplay muted></video>
+
+    <!-- Touch-Friendly HUD Overlay (Fades out automatically after 4s) -->
+    <div id="hud-overlay" class="hud-visible">
+      
+      <!-- Top HUD Bar -->
+      <div class="hud-top-bar">
+        <div class="hud-brand">
+          🕷️ WEBCAST <span style="font-size: 11px; color: #8da2be; font-weight: normal;">[RECEIVER]</span>
+        </div>
+        <div class="hud-stats-group">
+          <span id="hud-status" class="hud-stat-pill stat-warn">DISCONNECTED</span>
+          <span id="hud-fps" class="hud-stat-pill">0 FPS</span>
+          <span id="hud-res" class="hud-stat-pill">---x---</span>
+          <span id="hud-bitrate" class="hud-stat-pill">0 Kbps</span>
+          <span id="hud-latency" class="hud-stat-pill">-- ms</span>
+        </div>
+      </div>
+
+      <!-- Bottom HUD Controls -->
+      <div class="hud-bottom-bar">
+        <div>
+          <button type="button" id="btn-fullscreen" class="touch-btn">
+            ⛶ Fullscreen
+          </button>
+          <button type="button" id="btn-toggle-perf" class="touch-btn">
+            ⚡ Low-Perf: OFF
+          </button>
+          <button type="button" id="btn-toggle-audio" class="touch-btn" style="background: rgba(0, 255, 136, 0.2); border-color: #00ff88;">
+            🔊 Audio: ON
+          </button>
+          <button type="button" id="btn-switch-mode" class="touch-btn">
+            Mode: <span id="hud-mode" style="color: #00ffcc; margin-left: 4px;">TURBO CANVAS</span>
+          </button>
+        </div>
+
+        <div>
+          <button type="button" id="btn-reconnect" class="touch-btn">
+            🔄 Reconnect
+          </button>
+          <a href="index.html" class="touch-btn touch-btn-red">
+            ✕ Exit
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Initial Session Join Dialog (Shows if no session code in URL) -->
+    <div id="join-modal">
+      <div class="join-title">Connect to Sender</div>
+      <div class="join-subtitle">Enter the 6-character room code from your phone</div>
+      
+      <input type="text" id="session-code-input" class="join-input" placeholder="ABC123" maxlength="8" autofocus>
+      
+      <div id="compat-notice" class="compat-alert" style="display: none;"></div>
+
+      <button type="button" id="btn-connect" class="touch-btn" style="width: 100%; min-height: 48px; background: #00a2ff; margin: 8px 0;">
+        Connect to Screen Mirror
+      </button>
+
+      <div style="margin-top: 14px;">
+        <a href="index.html" style="color: #8da2be; font-size: 13px; text-decoration: none;">← Back to Home</a>
+      </div>
+    </div>
+
+    <!-- Connecting / Loading Spinner Overlay -->
+    <div id="connecting-overlay">
+      <div class="spinner"></div>
+      <div id="connect-status-text" style="color: #ffffff; font-size: 16px; font-weight: bold; letter-spacing: 1px;">
+        Connecting to stream...
+      </div>
+      <div style="color: #8da2be; font-size: 12px; margin-top: 6px;">
+        Optimizing for iOS 9/10 Safari hardware
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pure ES5 Compatible Scripts -->
+  <script src="utils.js"></script>
+  <script src="receiver.js"></script>
+</body>
+</html>

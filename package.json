@@ -1,0 +1,31 @@
+{
+  "name": "webcast-phone-to-ipad",
+  "version": "1.0.0",
+  "description": "High-quality low-latency Phone to iPad Screen Mirroring/WebCast optimized for legacy iOS 9 and iOS 10 Safari",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
+  },
+  "keywords": [
+    "screen-mirroring",
+    "webcast",
+    "ios-9",
+    "ios-10",
+    "ipad",
+    "webrtc",
+    "mjpeg",
+    "websocket",
+    "canvas-stream",
+    "hls"
+  ],
+  "author": "WebCast Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "qrcode": "^1.5.3",
+    "selfsigned": "^5.5.0",
+    "ws": "^8.17.0"
+  }
+}
