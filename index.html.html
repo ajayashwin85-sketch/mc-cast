@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>WebCast — High-Quality Phone-to-iPad MirrorCast (iOS 9 & iOS 10 Ready)</title>
+  <meta name="description" content="Turn your old iPad running iOS 9 or iOS 10 into a high-performance secondary display or screen mirror for your phone over local Wi-Fi with ultra-low latency.">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕷️</text></svg>">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">🕷️</div>
+      <div class="brand-name">
+        WEBCAST <span class="brand-badge">iOS 9/10 COMPATIBLE</span>
+      </div>
+    </a>
+    <div class="header-links">
+      <a href="sender.html" class="btn btn-red btn-sm">Sender (Phone)</a>
+      <a href="receiver.html" class="btn btn-blue btn-sm">Receiver (iPad)</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="hero-title">
+        Mirror Your <span class="highlight-red">Phone</span> to an Old <span class="highlight-blue">iPad</span>
+      </h1>
+      <p class="hero-subtitle">
+        Give your old iPad running iOS 9 or iOS 10 a second life as a responsive, ultra-low latency wireless screen mirror over your local Wi-Fi. No App Store downloads required.
+      </p>
+    </section>
+
+    <!-- Local Network Discovery HUD -->
+    <section class="network-card">
+      <div class="network-title">
+        <span>📡</span> Local Network Wi-Fi Addresses (Open on iPad Safari)
+      </div>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">
+        Ensure your phone and iPad are connected to the same Wi-Fi network. Type one of the following addresses into Safari on your iPad:
+      </p>
+      <div id="ip-container" class="ip-list">
+        <div class="ip-badge">Loading local network addresses...</div>
+      </div>
+    </section>
+
+    <!-- Role Selection Grid -->
+    <section class="role-grid">
+      
+      <!-- SENDER CARD (PHONE / SENDER) -->
+      <article class="card card-red">
+        <div class="card-header">
+          <div class="card-icon card-icon-red">📱</div>
+          <div>
+            <h2 class="card-title">Sender Mode</h2>
+            <div class="card-subtitle">Modern Phone / Android / PC</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-description">
+            Share your device screen or camera in real time. Select between 4K, 1080p, 720p, or 480p with adaptive frame throttling.
+          </p>
+          <ul class="feature-list">
+            <li class="feature-item">
+              <span class="feature-dot dot-red"></span>
+              Full screen capture with hardware acceleration
+            </li>
+            <li class="feature-item">
+              <span class="feature-dot dot-red"></span>
+              4K / 1080p / 720p / 480p selectable quality
+            </li>
+            <li class="feature-item">
+              <span class="feature-dot dot-red"></span>
+              Instant QR code pairing for quick connections
+            </li>
+          </ul>
+        </div>
+        <a href="sender.html" class="btn btn-red" id="btn-launch-sender">
+          <span>🚀</span> Start Casting (Sender)
+        </a>
+      </article>
+
+      <!-- RECEIVER CARD (OLD IPAD) -->
+      <article class="card card-blue">
+        <div class="card-header">
+          <div class="card-icon card-icon-blue">📺</div>
+          <div>
+            <h2 class="card-title">Receiver Mode</h2>
+            <div class="card-subtitle">iPad (iOS 9, iOS 10, or newer)</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-description">
+            Connect directly in iPad Safari. Uses pure ES5 Turbo Canvas and Multipart MJPEG for zero-lag mirroring on older A5/A6/A7 hardware.
+          </p>
+          
+          <!-- Quick Code Join Form -->
+          <div class="input-group">
+            <input type="text" id="quick-join-input" class="code-input" placeholder="CODE" maxlength="8">
+            <button type="button" class="btn btn-blue" id="btn-quick-join" style="width: auto; padding: 0 20px;">
+              Join
+            </button>
+          </div>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <span class="feature-dot dot-blue"></span>
+              Zero-install web receiver (iOS 9+ Safari tested)
+            </li>
+            <li class="feature-item">
+              <span class="feature-dot dot-blue"></span>
+              Sub-50ms ultra-low latency over local network
+            </li>
+            <li class="feature-item">
+              <span class="feature-dot dot-blue"></span>
+              Low-performance mode for 512MB RAM iPads
+            </li>
+          </ul>
+        </div>
+        <a href="receiver.html" class="btn btn-blue" id="btn-launch-receiver">
+          <span>📺</span> Open Display (Receiver)
+        </a>
+      </article>
+
+    </section>
+
+    <!-- Compatibility & Technical Specifications -->
+    <section class="card" style="margin-bottom: 40px;">
+      <div class="card-header">
+        <div class="card-icon" style="background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3);">⚡</div>
+        <div>
+          <h2 class="card-title">Engineered for Legacy iOS Devices</h2>
+          <div class="card-subtitle">Tested compatibility with iPad 2, iPad 3, iPad 4, iPad Air 1, iPad Mini 1/2/3</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; font-size: 0.9rem;">
+        <div style="background: rgba(8, 10, 16, 0.7); padding: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(0, 162, 255, 0.15);">
+          <strong style="color: var(--spider-red);">🎯 Turbo WebSocket Canvas</strong>
+          <p style="color: var(--text-muted); margin-top: 6px;">Bypasses heavy browser video decoder stacks. Delivers sub-50ms latency using lightweight double-buffered canvas frames.</p>
+        </div>
+        <div style="background: rgba(8, 10, 16, 0.7); padding: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(0, 162, 255, 0.15);">
+          <strong style="color: var(--web-blue);">🛡️ Multipart MJPEG Fallback</strong>
+          <p style="color: var(--text-muted); margin-top: 6px;">Universal image stream compatibility. Works natively in any Safari version since iOS 2 without needing WebRTC or MSE.</p>
+        </div>
+        <div style="background: rgba(8, 10, 16, 0.7); padding: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(0, 162, 255, 0.15);">
+          <strong style="color: var(--hud-green);">📶 Local Wi-Fi Direct</strong>
+          <p style="color: var(--text-muted); margin-top: 6px;">All screen video travels exclusively over your home/office local network. No cloud relay, no tracking, zero internet bandwidth consumed.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    WebCast MirrorCast &copy; 2026 — Optimized for Legacy iOS 9 & iOS 10 Safari
+  </footer>
+
+  <script src="utils.js"></script>
+  <script>
+    // Fetch and populate local network IP addresses
+    WebCastUtils.ajaxGet('/api/info', function(err, data) {
+      var container = document.getElementById('ip-container');
+      if (err || !data || !data.networkIps) {
+        if (container) container.innerHTML = '<div class="ip-badge">http://' + window.location.host + '</div>';
+        return;
+      }
+
+      var html = '';
+      data.networkIps.forEach(function(item) {
+        html += '<div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-bottom: 8px;">' +
+          '<div class="ip-badge" style="border-color: rgba(255, 42, 75, 0.4);">' +
+            '<span>📱 <strong>Phone Sender (HTTPS):</strong> ' + item.httpsUrl + '/sender.html</span>' +
+            '<button type="button" class="ip-copy-btn" onclick="copyIp(\'' + item.httpsUrl + '/sender.html\')">Copy</button>' +
+          '</div>' +
+          '<div class="ip-badge" style="border-color: rgba(0, 162, 255, 0.4);">' +
+            '<span>📺 <strong>Old iPad Receiver (HTTP):</strong> ' + item.httpUrl + '/receiver.html</span>' +
+            '<button type="button" class="ip-copy-btn" onclick="copyIp(\'' + item.httpUrl + '/receiver.html\')">Copy</button>' +
+          '</div>' +
+        '</div>';
+      });
+      if (container) container.innerHTML = html;
+    });
+
+    function copyIp(url) {
+      WebCastUtils.copyToClipboard(url, function(ok) {
+        if (ok) alert('Copied: ' + url);
+      });
+    }
+
+    // Quick Join button action
+    var joinBtn = document.getElementById('btn-quick-join');
+    var joinInput = document.getElementById('quick-join-input');
+    if (joinBtn && joinInput) {
+      joinBtn.addEventListener('click', function() {
+        var code = (joinInput.value || '').trim().toUpperCase();
+        if (code) {
+          window.location.href = 'receiver.html?session=' + code;
+        } else {
+          alert('Please enter a session code.');
+        }
+      });
+      joinInput.addEventListener('keypress', function(e) {
+        if (e.keyCode === 13 || e.which === 13) {
+          joinBtn.click();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
